@@ -21,21 +21,17 @@ public class MarkdownConvertHtml{
     // MarkdownConvert a = new MarkdownConvert();
     // MarkdownConvert convert = new MarkdownConvert();
 
-    // File Read part
+    /*
+    File Read part, and parsing part
+    */
     for(int i = 0; i < numberOfFile; i++){
       fileName[i] = args[i];
       /*  for test
       System.out.println("fileName[" + i + "] : " + fileName[i]);
       */
-    }
-    fileName[0] = args[0];
-    SeFileReader reader = new SeFileReader();
-    reader.setFileReaer(fileName[0]);
-
-    // parsing part
-    for(int i=0; i < numberOfFile; i++){
-      //MDParser parser = new MDParser(fileName[i]);
-      //FileReader reader = new FileReader(fileName[i]);
+      SeFileReader reader = new SeFileReader(fileName[i]);
+      // reader.setLine(fileName[i]);
+      MDParser parser = new MDParser(fileName[i]);
     }
   }
 }
