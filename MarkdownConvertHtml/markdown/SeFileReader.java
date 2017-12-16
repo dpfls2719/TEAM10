@@ -2,26 +2,36 @@ package markdown;
 
 import java.util.Scanner;
 import java.io.*;
-//import java.io.IOException;
 
 
 class SeFileReader{
   private static String option;
-  private static String inputFileName;
+  // private static String inputFileName;
   private static Scanner scan = new Scanner(System.in);
+  private static String[] line;
+  private static String buf;
+  /*
+  * Read file for user
+  * Input : inputFileName is input
+  */
 
   public SeFileReader(){
-
+    line = new String[100];
+    System.out.println("Input File name\n");
+    System.exit(1);
   }
 
-  /* Read file for user
-   * Input : inputFileName is input 
-   *
-   *
-   */
-  public static void setFileReaer(String inputFileName){
-    System.out.println("file name in converting : " + inputFileName);
-    System.out.println("This is file reader");
+  public SeFileReader(String inputFileName){
+    line = new String[300];
+    setLine(inputFileName);
+    printOption();
+  }
+
+  public static void setLine(String inputFileName){
+    /* System.out.println("file name in converting : " + inputFileName);
+    // System.out.println("This is file reader");
+    // System.out.println("input file : " + inputFileName);
+    */
     try{
       if(!(inputFileName.contains(".md") | inputFileName.contains(".MD"))){
         throw new Exception("Input exact file. Extention is vd\n");
@@ -33,22 +43,31 @@ class SeFileReader{
     // this.inputFileName = inputFileName;
 
     try{
-      BufferedReader in = new BufferedReader(new FileReader(new File(inputFileName)));
-      String s;
+      BufferedReader in = new BufferedReader(new FileReader(new File("C:\\SE_java\\MarkdownConvertHtml\\markdown\\" + inputFileName)));
+      int lineIndex=0;
 
-      while((s = in.readLine()) != null){
-          System.out.println(s);
+      /*
+      * read from file, and store in buf.
+      * Buf is stored in Line[lineIndex].
+      */
+
+      while((buf = in.readLine()) != null){
+          line[lineIndex++] = buf;
       }
+
+      /*
+      // It's for test line variable.
+      // System.out.println("Line Start");
+      // for(int i=0;i<lineIndex;i++)
+      //   System.out.println(line[i]);
+      */
 
       in.close();
     } catch (IOException e) {
       System.err.println(e);
       System.exit(1);
-    }
-
-    // System.out.println("This is for " + inputFileName + ".");
-    printOption();
   }
+}
 
   /*
    * it just print options
